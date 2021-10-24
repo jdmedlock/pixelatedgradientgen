@@ -16,7 +16,7 @@ html, body {
 }
 
 .pixel {
-	background-color: #3CB371;
+	/* background-color: #3CB371; */
 	float: left;
 	/* border: .1px dashed lightgrey; */
 }
@@ -26,7 +26,7 @@ html, body {
 	height: 100%;
 	position: absolute;
 	z-index: 10;
-	margin-top: .75rem;
+	margin-top: .7rem;
 	margin-left: 1rem;
 	font-family: "Fira Sans", sans-serif;
 	color: black;
