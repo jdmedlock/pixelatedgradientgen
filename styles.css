@@ -18,15 +18,15 @@ html, body {
 .pixel {
 	background-color: #3CB371;
 	float: left;
+	/* border: .1px dashed lightgrey; */
 }
 
 #title {
-
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	z-index: 10;
-	margin-top: 1rem;
+	margin-top: 1.25rem;
 	margin-left: 1rem;
 	color: black;
 	font-size: 2rem;

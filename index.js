@@ -10,6 +10,7 @@ const generateBar = (pixelatedBar) => {
     pH = pW,
     rows = parseInt(windowHeight/pH)
 
+
   let r = 0
 
   while (r < rows) {
@@ -41,4 +42,4 @@ const addTextToBar = (sectionText) => {
 const pixels = document.querySelector("#pixels")
 
 generateBar(pixels)
-addTextToBar('"A good opportunity to learn by building real projects and get out of tutorial purgatory"')
+addTextToBar('"Building real projects to get out of tutorial purgatory"')
