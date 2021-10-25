@@ -5,8 +5,12 @@ html, body {
 	margin: 0;
 }
 
-#description {
+#sectionBar {
 	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
 }
 
 #pixels{
@@ -17,7 +21,6 @@ html, body {
 
 .pixel {
 	float: left;
-	/* border: .1px dashed lightgrey; */
 }
 
 #title {
@@ -25,7 +28,7 @@ html, body {
 	height: 100%;
 	position: absolute;
 	z-index: 10;
-	margin-top: .7rem;
+	margin-top: 2rem;
 	margin-left: 1rem;
 	font-family: "Fira Sans", sans-serif;
 	color: black;
