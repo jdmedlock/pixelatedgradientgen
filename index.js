@@ -1,35 +1,27 @@
 // This is based on work by Eric Winton (https://codepen.io/ericwinton/pen/YQmayz).
 // This implementation reverses the order of the generated pattern
 // so it progresses from dark to light in a left-to-right direction.
-const generateBar = (pixelatedBar, bgColor) => {	
+const generateBar = (pixelatedBar, noRows, bgColor) => {	
 
-  let grid = 100, //anything over a couple hundred will probably kill it
-    windowWidth = window.innerWidth,
-    windowHeight = innerHeight = window.innerHeight/10,
-    pW = windowWidth/grid,
-    pH = pW,
-    rows = parseInt(windowHeight/pH)
+  let windowWidth = window.innerWidth
+  let pW = 15
+  let pH = pW
+  let noColumns = parseInt(windowWidth/pW)
 
-  let r = 0
-
-  while (r < rows) {
-    var p = 0
-    while (p < grid) {
-      var tenth = p/grid
-      if (p < grid/10) {
+  for (let r = 0; r < noRows; r++) {
+    for (let c = 0; c < noColumns; c++) {
+      const tenth = c/noColumns
+      if (c < noColumns/10) {
         var randomNumber = (Math.random() * tenth)
       } else {
         var randomNumber = (Math.random() * tenth) + (tenth - .05)
       }
-      
-      let opacity = 1.7 - randomNumber.toFixed(2)
+      const opacity = 1.7 - randomNumber.toFixed(2)
       const pixel = document.createElement("div")
-      pixel.setAttribute("style", `background-color: ${bgColor}; opacity: ${opacity}; height: ${pH}px; width: ${pW}px;`)
+      pixel.setAttribute("style", `background-color: ${ bgColor }; opacity: ${ opacity }; height: ${ pH }px; width: ${ pW }px;`)
       pixel.setAttribute("class", "pixel")
       pixelatedBar.appendChild(pixel)
-      p++;		
     }
-    r++
   }
 }
 
@@ -40,5 +32,5 @@ const addTextToBar = (sectionText) => {
 
 const pixels = document.querySelector("#pixels")
 
-generateBar(pixels, "#3CB371")
+generateBar(pixels, 5, "#3CB371")
 addTextToBar('"Building real projects to get out of tutorial purgatory"')
