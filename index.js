@@ -24,24 +24,23 @@ const generateBar = (pixelatedBar, noRows, bgColor) => {
   }
 }
 
-const addTextToBar = (title, sectionText) => {
-  title.innerHTML += sectionText
-}
-
 window.addEventListener('load', (event) => {
-  const pixels1 = document.getElementById('pixels1')
-  generateBar(pixels1, 5, "#3CB371")
-  const title1 = document.getElementById("title1")
-  addTextToBar(title1, 'Building real projects to get out of tutorial purgatory')
-
-  const pixels2 = document.getElementById('pixels2')
-  generateBar(pixels2, 5, "#F5521F")
-  const title2 = document.getElementById("title2")
-  addTextToBar(title2, 'Chingu helped me land my dream job!')
-
-  const pixels3 = document.getElementById('pixels3')
-  console.log('pixels3: ', pixels3)
-  generateBar(pixels3, 5, "#4362AB")
-  const title3 = document.getElementById("title3")
-  addTextToBar(title3, 'Chingu helped me turn what I learned into experience')
+  barColors = [
+    "#3CB371",
+    "#F5521F",
+    "#4362AB",
+    "#3CB371",
+    "#F5521F",
+    "#4362AB",
+    "#3CB371",
+    "#F5521F",
+    "#4362AB",
+    "#3CB371",
+    "#F5521F",
+    "#4362AB",
+  ]
+  const pixelBars = document.getElementsByClassName('pixels')
+  for (i = 0; i < pixelBars.length; i++) {
+    generateBar(pixelBars[i], 5, barColors[i])
+  }
 })
