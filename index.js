@@ -1,10 +1,17 @@
 // This is based on work by Eric Winton (https://codepen.io/ericwinton/pen/YQmayz).
 // This implementation reverses the order of the generated pattern
 // so it progresses from dark to light in a left-to-right direction.
-const pixelDimensions = 15
+const PIXELDIMENSION = 15
+const BARCOLORS = [
+  "#3CB371",
+  "#F5521F",
+  "#4362AB",
+  "#3CB371",
+]
+
 const generateBar = (pixelatedBar, noRows, bgColor) => {
   let windowWidth = window.innerWidth
-  let pW = pixelDimensions
+  let pW = PIXELDIMENSION
   let pH = pW
   let noColumns = parseInt(windowWidth/pW)
 
@@ -27,18 +34,12 @@ const generateBar = (pixelatedBar, noRows, bgColor) => {
 }
 
 window.addEventListener('load', (event) => {
-  barColors = [
-    "#3CB371",
-    "#F5521F",
-    "#4362AB",
-    "#3CB371",
-  ]
   const pixelBars = document.getElementsByClassName('pixels')
   for (i = 0; i < pixelBars.length; i++) {
     const sectionId = 'section'.concat((i+1).toString())
     const sectionBar = document.getElementById(sectionId)
     const barRows = sectionBar.getAttribute('barRows')
-    sectionBar.setAttribute("style", `height: ${ pixelDimensions*barRows }px;`)
-    generateBar(pixelBars[i], barRows, barColors[i])
+    sectionBar.setAttribute("style", `height: ${ PIXELDIMENSION*barRows }px;`)
+    generateBar(pixelBars[i], barRows, BARCOLORS[i])
   }
 })
