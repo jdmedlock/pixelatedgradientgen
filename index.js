@@ -9,14 +9,20 @@ const BARCOLORS = [
   "#3CB371",
 ]
 
-const generateBar = (pixelatedBar, noRows, bgColor) => {
+const generateBar = (sectionNo, sectionBar) => {
   let windowWidth = window.innerWidth
   let pW = PIXELDIMENSION
   let pH = pW
   let noColumns = parseInt(windowWidth/pW)
 
-  for (let r = 0; r < noRows; r++) {
+  // Locate the DOM element the pixelated bar is to be added to
+  const barRows = sectionBar.getAttribute('barRows')
+  sectionBar.setAttribute("style", `height: ${ PIXELDIMENSION*barRows }px;`)
+  const pixelation = sectionBar.getElementsByClassName('pixels')[0]
+
+  for (let r = 0; r < barRows; r++) {
     for (let c = 0; c < noColumns; c++) {
+      // Create one pixel to be added to the bar
       let randomNumber
       const tenth = c/noColumns
       if (c < noColumns/10) {
@@ -25,21 +31,19 @@ const generateBar = (pixelatedBar, noRows, bgColor) => {
         randomNumber = (Math.random() * tenth) + (tenth - .05)
       }
       const opacity = 1.7 - randomNumber.toFixed(2)
+
+      // Add the new pixel to the bar
       let pixel = document.createElement("div")
-      pixel.setAttribute("style", `background-color: ${ bgColor }; opacity: ${ opacity }; height: ${ pH }px; width: ${ pW }px;`)
+      pixel.setAttribute("style", `background-color: ${ BARCOLORS[sectionNo] }; opacity: ${ opacity }; height: ${ pH }px; width: ${ pW }px;`)
       pixel.setAttribute("class", "pixel")
-      pixelatedBar.appendChild(pixel)
+      pixelation.appendChild(pixel)
     }
   }
 }
 
 window.addEventListener('load', (event) => {
-  const pixelBars = document.getElementsByClassName('pixels')
-  for (i = 0; i < pixelBars.length; i++) {
-    const sectionId = 'section'.concat((i+1).toString())
-    const sectionBar = document.getElementById(sectionId)
-    const barRows = sectionBar.getAttribute('barRows')
-    sectionBar.setAttribute("style", `height: ${ PIXELDIMENSION*barRows }px;`)
-    generateBar(pixelBars[i], barRows, BARCOLORS[i])
+  const sectionBars = document.getElementsByClassName('sectionBar')
+  for (i = 0; i < sectionBars.length; i++) {
+    generateBar(i, sectionBars[i])
   }
 })
