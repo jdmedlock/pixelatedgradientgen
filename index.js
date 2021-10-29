@@ -3,10 +3,10 @@
 // so it progresses from dark to light in a left-to-right direction.
 const PIXELDIMENSION = 15
 const BARCOLORS = [
-  "#3CB371",
-  "#F5521F",
-  "#4362AB",
-  "#3CB371",
+  "#44D044",
+  "#FF5353",
+  "#34A1A1",
+  "#FFA153",
 ]
 
 const generateBar = (sectionNo, sectionBar) => {
