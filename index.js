@@ -1,44 +1,49 @@
 // This is based on work by Eric Winton (https://codepen.io/ericwinton/pen/YQmayz).
 // This implementation reverses the order of the generated pattern
 // so it progresses from dark to light in a left-to-right direction.
-const generateBar = (pixelatedBar, bgColor) => {	
+const PIXELDIMENSION = 15
+const BARCOLORS = [
+  "#44D044",
+  "#FF5353",
+  "#34A1A1",
+  "#FFA153",
+]
 
-  let grid = 100, //anything over a couple hundred will probably kill it
-    windowWidth = window.innerWidth,
-    windowHeight = innerHeight = window.innerHeight/10,
-    pW = windowWidth/grid,
-    pH = pW,
-    rows = parseInt(windowHeight/pH)
+const generateBar = (sectionNo, sectionBar) => {
+  let windowWidth = window.innerWidth
+  let pW = PIXELDIMENSION
+  let pH = pW
+  let noColumns = parseInt(windowWidth/pW)
 
-  let r = 0
+  // Locate the DOM element the pixelated bar is to be added to
+  const barRows = sectionBar.getAttribute('barRows')
+  sectionBar.setAttribute("style", `height: ${ PIXELDIMENSION*barRows }px;`)
+  const pixelation = sectionBar.getElementsByClassName('pixels')[0]
 
-  while (r < rows) {
-    var p = 0
-    while (p < grid) {
-      var tenth = p/grid
-      if (p < grid/10) {
-        var randomNumber = (Math.random() * tenth)
+  for (let r = 0; r < barRows; r++) {
+    for (let c = 0; c < noColumns; c++) {
+      // Create one pixel to be added to the bar
+      let randomNumber
+      const tenth = c/noColumns
+      if (c < noColumns/10) {
+        randomNumber = (Math.random() * tenth)
       } else {
-        var randomNumber = (Math.random() * tenth) + (tenth - .05)
+        randomNumber = (Math.random() * tenth) + (tenth - .05)
       }
-      
-      let opacity = 1.7 - randomNumber.toFixed(2)
-      const pixel = document.createElement("div")
-      pixel.setAttribute("style", `background-color: ${bgColor}; opacity: ${opacity}; height: ${pH}px; width: ${pW}px;`)
+      const opacity = 1.7 - randomNumber.toFixed(2)
+
+      // Add the new pixel to the bar
+      let pixel = document.createElement("div")
+      pixel.setAttribute("style", `background-color: ${ BARCOLORS[sectionNo] }; opacity: ${ opacity }; height: ${ pH }px; width: ${ pW }px;`)
       pixel.setAttribute("class", "pixel")
-      pixelatedBar.appendChild(pixel)
-      p++;		
+      pixelation.appendChild(pixel)
     }
-    r++
   }
 }
 
-const addTextToBar = (sectionText) => {
-  let title = document.getElementById('title')
-  title.innerHTML += sectionText
-}
-
-const pixels = document.querySelector("#pixels")
-
-generateBar(pixels, "#3CB371")
-addTextToBar('"Building real projects to get out of tutorial purgatory"')
+window.addEventListener('load', (event) => {
+  const sectionBars = document.getElementsByClassName('sectionBar')
+  for (i = 0; i < sectionBars.length; i++) {
+    generateBar(i, sectionBars[i])
+  }
+})
